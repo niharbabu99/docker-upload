@@ -2,8 +2,9 @@ resources:
 - name: tutorial
   type: git
   source:
-    uri: https://github.com/drnic/concourse-tutorial.git
-    branch: develop
+    uri: git@github.com:niharbabu99/docker-upload.git 
+    branch: master
+    private_key: ((p_key))
 
 - name: hello-world-docker-image
   type: docker-image
@@ -20,7 +21,9 @@ jobs:
   - get: tutorial
   - put: hello-world-docker-image
     params:
-      build: tutorial/tutorials/miscellaneous/docker-images/docker
+      build: tutorial/docker
+      tag_prefix: testing
+      tag: tutorial/docker/tagfile
   - task: run
     config:
       platform: linux
